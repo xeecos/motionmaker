@@ -209,6 +209,13 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             print(error)
         }
         
+        let audioDevice:AVCaptureDevice? = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        do{
+            let audioInput:AVCaptureDeviceInput? = try AVCaptureDeviceInput(device: audioDevice!);
+            captureSession!.addInput(audioInput)
+        }catch let err as NSError{
+            print(err)
+        }
         
         previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         //CGRect(x: 0, y: 0, width: 640, height: 1136)
@@ -251,13 +258,6 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             let outputpathofmovie:String! = documentsDirectoryPath.stringByAppendingString("/\(NSDate().timeIntervalSince1970)").stringByAppendingString(".MOV");
             let outputURL:NSURL! = NSURL(fileURLWithPath: outputpathofmovie);
             print(outputURL.path)
-            let audioDevice:AVCaptureDevice? = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
-            do{
-                let audioInput:AVCaptureDeviceInput? = try AVCaptureDeviceInput(device: audioDevice!);
-                captureSession!.addInput(audioInput)
-            }catch let err as NSError{
-                print(err)
-            }
             var videoConnection:AVCaptureConnection?;
 
             for connection in videoOutput!.connections
