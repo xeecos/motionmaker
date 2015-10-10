@@ -11,10 +11,12 @@ import UIKit
 class SettingViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
 
     @IBOutlet weak var videoView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.titleLabel.text = NSLocalizedString("Setting", comment: "")
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(animated: Bool) {
@@ -62,21 +64,21 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         var title:String?
         switch(section){
         case 0:
-            title = "Mode"
+            title = NSLocalizedString("Mode", comment: "")
             break
         case 1:
-            title = "Resolution"
+            title = NSLocalizedString("Resolution", comment: "")
             break
         case 2:
-            title = "Start"
+            title = NSLocalizedString("Start", comment: "")
             break
         default:
             break
         }
         if(section==tableView.numberOfSections-1){
-            title = "Add"
+            title = NSLocalizedString("Add", comment: "")
         }else if(section==tableView.numberOfSections-2){
-            title = "End"
+            title = NSLocalizedString("End", comment: "")
         }else if(section>2){
             title = "# \(section-2)"
         }
@@ -153,6 +155,10 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
+    }
+    
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.LandscapeRight;
     }
 
     override func prefersStatusBarHidden() -> Bool {

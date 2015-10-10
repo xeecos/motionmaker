@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -17,16 +17,19 @@
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="4Uk-S6-o9h">
                         <rect key="frame" x="8" y="11" width="552" height="29"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <segments>
-                            <segment title="Video"/>
-                            <segment title="Timelaspe"/>
+                            <segment title="普通"/>
+                            <segment title="延时摄影"/>
                         </segments>
                         <connections>
                             <action selector="modeChanged:" destination="3jv-Vb-tbv" eventType="valueChanged" id="AZc-Fa-bOe"/>
                         </connections>
                     </segmentedControl>
                 </subviews>
+                <animations/>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="modeSeg" destination="4Uk-S6-o9h" id="c7K-BM-o2X"/>
             </connections>
@@ -42,6 +45,7 @@
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="H7n-O4-SV6">
                         <rect key="frame" x="8" y="11" width="552" height="29"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <segments>
                             <segment title="720p"/>
                             <segment title="1080p"/>
@@ -51,7 +55,9 @@
                         </connections>
                     </segmentedControl>
                 </subviews>
+                <animations/>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="resolutionSeg" destination="H7n-O4-SV6" id="UEf-9P-0mH"/>
             </connections>
@@ -67,6 +73,7 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="8000" id="Lb6-1S-BfC">
                         <rect key="frame" x="11" y="26" width="470" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="focusChanged:" destination="S2Y-Qw-ape" eventType="valueChanged" id="ac2-GC-ccN"/>
                             <action selector="focusEnd:" destination="S2Y-Qw-ape" eventType="touchUpOutside" id="a1a-Ff-ZIT"/>
@@ -76,13 +83,15 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="8hR-vW-xSe">
                         <rect key="frame" x="487" y="27" width="73" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Focus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gkg-9i-t0F">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="焦距" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gkg-9i-t0F">
                         <rect key="frame" x="30" y="8" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -90,6 +99,7 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1000" maxValue="1000" id="WMa-sb-Xzl">
                         <rect key="frame" x="11" y="82" width="470" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="speedChanged:" destination="S2Y-Qw-ape" eventType="valueChanged" id="scJ-Zx-6Hd"/>
                             <action selector="speedTouchEnd:" destination="S2Y-Qw-ape" eventType="touchUpOutside" id="diX-zF-Qch"/>
@@ -99,13 +109,15 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vOz-EG-73Z">
                         <rect key="frame" x="487" y="83" width="73" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="87j-Aa-Cdd">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快门速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="87j-Aa-Cdd">
                         <rect key="frame" x="30" y="64" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -113,22 +125,25 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="100" maxValue="1600" id="TfD-Js-Anr">
                         <rect key="frame" x="11" y="138" width="470" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="isoChanged:" destination="S2Y-Qw-ape" eventType="valueChanged" id="Ft8-SF-xkA"/>
                             <action selector="isoEnd:" destination="S2Y-Qw-ape" eventType="touchUpInside" id="NJY-4N-wNZ"/>
                             <action selector="isoEnd:" destination="S2Y-Qw-ape" eventType="touchUpOutside" id="dVy-44-IDT"/>
                         </connections>
                     </slider>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ISO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WTz-gm-dT3">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="感光度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WTz-gm-dT3">
                         <rect key="frame" x="30" y="120" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="71W-Xa-cnp">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="拍摄时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="71W-Xa-cnp">
                         <rect key="frame" x="30" y="176" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -136,6 +151,7 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-300" maxValue="300" id="L4S-cg-H1Q">
                         <rect key="frame" x="11" y="194" width="416" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="timeChanged:" destination="S2Y-Qw-ape" eventType="valueChanged" id="8Qd-qk-FDw"/>
                             <action selector="timeTouchEnd:" destination="S2Y-Qw-ape" eventType="touchUpInside" id="sw9-JC-BrE"/>
@@ -144,13 +160,15 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 secs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qFV-ZQ-5H6">
                         <rect key="frame" x="431" y="196" width="134" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interval" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r6l-bE-M4P">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="间隔时间" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r6l-bE-M4P">
                         <rect key="frame" x="30" y="232" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -158,6 +176,7 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-50" maxValue="50" id="B6U-1x-LrQ">
                         <rect key="frame" x="13" y="250" width="416" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="intervalChanged:" destination="S2Y-Qw-ape" eventType="valueChanged" id="of3-6I-ZZi"/>
                             <action selector="intervalTouchEnd:" destination="S2Y-Qw-ape" eventType="touchUpInside" id="hzY-lg-IcK"/>
@@ -166,6 +185,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 frames / 5 secs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="L9k-dY-gqx">
                         <rect key="frame" x="433" y="251" width="134" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -173,12 +193,15 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gLe-xA-VWL">
                         <rect key="frame" x="487" y="139" width="73" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <animations/>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="focusLabel" destination="8hR-vW-xSe" id="wS7-Np-9WA"/>
                 <outlet property="focusSlider" destination="Lb6-1S-BfC" id="GMC-ZN-Gbf"/>
@@ -203,6 +226,7 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="0.0" maxValue="8000" id="Lid-Ec-XwS">
                         <rect key="frame" x="11" y="26" width="416" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="focusChanged:" destination="SxC-Vz-8OE" eventType="valueChanged" id="dl0-nI-fkf"/>
                             <action selector="focusEnd:" destination="SxC-Vz-8OE" eventType="touchUpInside" id="AAP-kn-Xe7"/>
@@ -212,13 +236,15 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="60d-Lo-SIJ">
                         <rect key="frame" x="431" y="28" width="73" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Focus" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pkC-gs-9ua">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="焦距" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pkC-gs-9ua">
                         <rect key="frame" x="30" y="8" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -226,6 +252,7 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-1000" maxValue="1000" id="a7p-Ob-hVL">
                         <rect key="frame" x="11" y="82" width="416" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="speedChanged:" destination="SxC-Vz-8OE" eventType="valueChanged" id="sp8-P5-wNj"/>
                             <action selector="speedTouchEnd:" destination="SxC-Vz-8OE" eventType="touchUpOutside" id="ciV-vI-nFp"/>
@@ -235,6 +262,7 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Xo4-kY-461">
                         <rect key="frame" x="507" y="81" width="51" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="speedSwitch:" destination="SxC-Vz-8OE" eventType="valueChanged" id="ADj-Hg-aGD"/>
                         </connections>
@@ -242,13 +270,15 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Vcq-l3-e5L">
                         <rect key="frame" x="431" y="83" width="73" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Speed" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0gh-jB-Bpn">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快门速度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0gh-jB-Bpn">
                         <rect key="frame" x="30" y="64" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -256,6 +286,7 @@
                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="100" minValue="100" maxValue="1600" id="Jjz-hI-bxl">
                         <rect key="frame" x="11" y="138" width="416" height="31"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="isoChanged:" destination="SxC-Vz-8OE" eventType="valueChanged" id="Lz6-gq-ecG"/>
                             <action selector="isoEnd:" destination="SxC-Vz-8OE" eventType="touchUpInside" id="SiX-oF-KCU"/>
@@ -265,6 +296,7 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="McP-hN-Cfw">
                         <rect key="frame" x="507" y="135" width="51" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="isoSwitch:" destination="SxC-Vz-8OE" eventType="valueChanged" id="rUy-Jz-uEY"/>
                         </connections>
@@ -272,13 +304,15 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="auto" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lpV-Dl-ade">
                         <rect key="frame" x="431" y="137" width="73" height="27"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End ISO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vyB-gu-yc7">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="感光度" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vyB-gu-yc7">
                         <rect key="frame" x="30" y="120" width="118" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -286,12 +320,15 @@
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="4XC-05-lbw">
                         <rect key="frame" x="507" y="26" width="51" height="31"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <animations/>
                         <connections>
                             <action selector="focusSwitch:" destination="SxC-Vz-8OE" eventType="valueChanged" id="2WV-9Y-qdX"/>
                         </connections>
                     </switch>
                 </subviews>
+                <animations/>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="focusLabel" destination="60d-Lo-SIJ" id="xD9-Cd-YHI"/>
                 <outlet property="focusSlider" destination="Lid-Ec-XwS" id="K7r-2O-Saf"/>
@@ -313,9 +350,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8sr-Ez-3BJ">
-                        <rect key="frame" x="288.00000001402464" y="10" width="272" height="30"/>
+                        <rect key="frame" x="288" y="10" width="272" height="30"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Remove Transform Point">
+                        <animations/>
+                        <state key="normal" title="移除变化点">
                             <color key="titleColor" red="1" green="0.35892355329999998" blue="0.34612026200000001" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
@@ -325,13 +363,16 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4Ws-0o-Ugf">
                         <rect key="frame" x="8" y="12" width="272" height="30"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Add Transform Point"/>
+                        <animations/>
+                        <state key="normal" title="新增变化点"/>
                         <connections>
                             <action selector="addCameraHandle:" destination="-1" eventType="touchUpInside" id="Kcn-iT-LFS"/>
                         </connections>
                     </button>
                 </subviews>
+                <animations/>
             </tableViewCellContentView>
+            <animations/>
             <point key="canvasLocation" x="543" y="1586.5"/>
         </tableViewCell>
     </objects>

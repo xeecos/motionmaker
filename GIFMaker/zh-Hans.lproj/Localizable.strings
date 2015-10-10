@@ -1,0 +1,27 @@
+/* 
+  Localizable.strings
+  GIFMaker
+
+  Created by indream on 15/10/10.
+  Copyright © 2015年 indream. All rights reserved.
+*/
+
+"Record"="录像";
+"Stop"="停止";
+"The video is saved into Photo Album \"Motion Maker\""="视频已保存到相册\"Motion Maker\"";
+"Setting"="设置";
+"Mode"="模式";
+"Interval"="间隔时间";
+"Resolution"="分辨率";
+"Start"="开始";
+"End"="结束";
+"Focus"="焦距";
+"Speed"="快门速度";
+"Save"="保存";
+"ISO"="感光度";
+"Time"="拍摄时间";
+"secs"="秒";
+"Add"="添加";
+"Add Transform Point"="新增变化点";
+"Remove Transform Point"="移除变化点";
+"frames"="帧";

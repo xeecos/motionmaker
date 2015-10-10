@@ -29,6 +29,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         VideoManager.sharedManager().initSession();
+        
+        recordButton.title = NSLocalizedString("Record", comment: "")
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "disableRecord", name: "STOP_RECORDING", object: nil)
     }
     override func viewWillAppear(animated: Bool) {
@@ -45,15 +48,25 @@ class ViewController: UIViewController {
    
     
     var recording:Bool = false
-    
+    var disableButton:Bool = false
     @IBAction func switchRecord(sender: AnyObject) {
+        if(disableButton){
+            let time: NSTimeInterval = 2.0
+            let delay = dispatch_time(DISPATCH_TIME_NOW,Int64(time * Double(NSEC_PER_SEC)))
+            dispatch_after(delay, dispatch_get_main_queue()) {
+                self.disableButton = false
+            }
+            return
+        }
+        disableButton = true
         let item:UIBarButtonItem = sender as! UIBarButtonItem
         recording = !recording
         if(recording){
-            item.title = "Stop"
+            item.title = NSLocalizedString("Stop", comment: "")
             startRecord()
+            
         }else{
-            item.title = "Record"
+            item.title = NSLocalizedString("Record", comment: "")
             stopRecord()
         }
     }
@@ -61,8 +74,8 @@ class ViewController: UIViewController {
     func disableRecord(){
         print("disableRecord")
         recording = false
-        recordButton.title = "Record"
-        let alert:UIAlertView? = UIAlertView(title: "Tip", message: "The video is saved into Photo Album \"Motion Maker\"", delegate: nil, cancelButtonTitle: "OK")
+        recordButton.title = NSLocalizedString("Record", comment: "")
+        let alert:UIAlertView? = UIAlertView(title: "Tip", message: NSLocalizedString("The video is saved into Photo Album \"Motion Maker\"",comment:""), delegate: nil, cancelButtonTitle: "OK")
         alert?.show()
         
     }
@@ -70,13 +83,14 @@ class ViewController: UIViewController {
     func startRecord() {
         VideoManager.sharedManager().recordBarButton = self.recordButton
         VideoManager.sharedManager().startRecord()
+        
     }
     func stopRecord() {
         VideoManager.sharedManager().stopRecord()
     }
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.Landscape;
+        return UIInterfaceOrientationMask.LandscapeRight;
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

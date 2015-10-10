@@ -190,7 +190,9 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             //            let conf = device.activeFormat
             //            print(conf.minExposureDuration,conf.maxExposureDuration)
             let duration:CMTime = CMTimeMake(1, Int32(max(2,currentSpeed)))
-            device.setExposureModeCustomWithDuration(duration, ISO: (Float(currentISO-100)/1600)*(672-28)+28, completionHandler: { (timestamp:CMTime) -> Void in
+            let minISO = device.activeFormat.minISO
+            let maxISO = device.activeFormat.maxISO
+            device.setExposureModeCustomWithDuration(duration, ISO: (Float(currentISO-100)/1600)*(maxISO-minISO)+minISO, completionHandler: { (timestamp:CMTime) -> Void in
                 
             })
             

@@ -10,8 +10,8 @@
 		6E1E793F1BB6EF0100B96EB1 /* EndCameraSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1E793E1BB6EF0100B96EB1 /* EndCameraSettingCell.swift */; settings = {ASSET_TAGS = (); }; };
 		6E524C151BB82C920097A3C2 /* logo-320.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E524C141BB82C920097A3C2 /* logo-320.png */; settings = {ASSET_TAGS = (); }; };
 		6E524C171BB836E20097A3C2 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6E524C161BB836E20097A3C2 /* setting@2x.png */; settings = {ASSET_TAGS = (); }; };
+		6E8392501BC95F910076E576 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6E8392521BC95F910076E576 /* Localizable.strings */; };
 		6EA9F3901BAE56C50018766B /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA9F38E1BAE56C50018766B /* SettingViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		6EA9F3911BAE56C50018766B /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EA9F38F1BAE56C50018766B /* SettingViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		6EA9F3931BAEC0B10018766B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA9F3921BAEC0B10018766B /* DataManager.swift */; settings = {ASSET_TAGS = (); }; };
 		6EA9F3951BAEC53B0018766B /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA9F3941BAEC53B0018766B /* CameraModel.swift */; settings = {ASSET_TAGS = (); }; };
 		6EA9F3971BAEC54C0018766B /* SettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA9F3961BAEC54C0018766B /* SettingModel.swift */; settings = {ASSET_TAGS = (); }; };
@@ -28,8 +28,10 @@
 		6ECF6A431BAB0A900075317A /* GIFMakerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECF6A421BAB0A900075317A /* GIFMakerTests.swift */; };
 		6ECF6A4E1BAB0A900075317A /* GIFMakerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ECF6A4D1BAB0A900075317A /* GIFMakerUITests.swift */; };
 		6ECF6A5C1BAB16BA0075317A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ECF6A5B1BAB16BA0075317A /* AVFoundation.framework */; };
-		6EDC21D31BB2EEA80046A369 /* SettingCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDC21D21BB2EEA80046A369 /* SettingCells.xib */; settings = {ASSET_TAGS = (); }; };
 		6EDC21D51BB2F07F0046A369 /* VideoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDC21D41BB2F07F0046A369 /* VideoManager.swift */; settings = {ASSET_TAGS = (); }; };
+		6EDF7B4A1BC964720004A367 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6EDF7B4C1BC964720004A367 /* InfoPlist.strings */; };
+		6EDF7B4E1BC968F50004A367 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDF7B501BC968F50004A367 /* SettingViewController.xib */; };
+		6EDF7B521BC9692B0004A367 /* SettingCells.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6EDF7B541BC9692B0004A367 /* SettingCells.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,8 +55,11 @@
 		6E1E793E1BB6EF0100B96EB1 /* EndCameraSettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndCameraSettingCell.swift; sourceTree = "<group>"; };
 		6E524C141BB82C920097A3C2 /* logo-320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo-320.png"; sourceTree = "<group>"; };
 		6E524C161BB836E20097A3C2 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		6E83924C1BC95EFA0076E576 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		6E83924D1BC95EFA0076E576 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		6E8392511BC95F910076E576 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6E8392531BC95F990076E576 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6EA9F38E1BAE56C50018766B /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		6EA9F38F1BAE56C50018766B /* SettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		6EA9F3921BAEC0B10018766B /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		6EA9F3941BAEC53B0018766B /* CameraModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		6EA9F3961BAEC54C0018766B /* SettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingModel.swift; sourceTree = "<group>"; };
@@ -77,8 +82,13 @@
 		6ECF6A4D1BAB0A900075317A /* GIFMakerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFMakerUITests.swift; sourceTree = "<group>"; };
 		6ECF6A4F1BAB0A900075317A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6ECF6A5B1BAB16BA0075317A /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		6EDC21D21BB2EEA80046A369 /* SettingCells.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingCells.xib; sourceTree = "<group>"; };
 		6EDC21D41BB2F07F0046A369 /* VideoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoManager.swift; sourceTree = "<group>"; };
+		6EDF7B4B1BC964720004A367 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		6EDF7B4D1BC964730004A367 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		6EDF7B4F1BC968F50004A367 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/SettingViewController.xib"; sourceTree = "<group>"; };
+		6EDF7B511BC968F90004A367 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingViewController.xib; sourceTree = "<group>"; };
+		6EDF7B531BC9692B0004A367 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/SettingCells.xib"; sourceTree = "<group>"; };
+		6EDF7B551BC9692E0004A367 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SettingCells.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +157,8 @@
 				6ECF6A2C1BAB0A900075317A /* ViewController.swift */,
 				6EDC21D41BB2F07F0046A369 /* VideoManager.swift */,
 				6EA9F38E1BAE56C50018766B /* SettingViewController.swift */,
-				6EA9F38F1BAE56C50018766B /* SettingViewController.xib */,
-				6EDC21D21BB2EEA80046A369 /* SettingCells.xib */,
+				6EDF7B501BC968F50004A367 /* SettingViewController.xib */,
+				6EDF7B541BC9692B0004A367 /* SettingCells.xib */,
 				6EA9F39A1BAEF2C20018766B /* ModeSettingCell.swift */,
 				6EA9F39C1BAEF2DC0018766B /* ResolutionSettingCell.swift */,
 				6EA9F39E1BAEF2F00018766B /* CameraSettingCell.swift */,
@@ -160,6 +170,8 @@
 				6ECF6A341BAB0A900075317A /* Assets.xcassets */,
 				6ECF6A361BAB0A900075317A /* LaunchScreen.storyboard */,
 				6ECF6A391BAB0A900075317A /* Info.plist */,
+				6EDF7B4C1BC964720004A367 /* InfoPlist.strings */,
+				6E8392521BC95F910076E576 /* Localizable.strings */,
 				6ECF6A311BAB0A900075317A /* GIFMaker.xcdatamodeld */,
 			);
 			path = GIFMaker;
@@ -291,9 +303,11 @@
 				6ECF6A381BAB0A900075317A /* LaunchScreen.storyboard in Resources */,
 				6E524C171BB836E20097A3C2 /* setting@2x.png in Resources */,
 				6ECF6A351BAB0A900075317A /* Assets.xcassets in Resources */,
-				6EDC21D31BB2EEA80046A369 /* SettingCells.xib in Resources */,
+				6EDF7B521BC9692B0004A367 /* SettingCells.xib in Resources */,
+				6E8392501BC95F910076E576 /* Localizable.strings in Resources */,
 				6ECF6A301BAB0A900075317A /* Main.storyboard in Resources */,
-				6EA9F3911BAE56C50018766B /* SettingViewController.xib in Resources */,
+				6EDF7B4A1BC964720004A367 /* InfoPlist.strings in Resources */,
+				6EDF7B4E1BC968F50004A367 /* SettingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,10 +379,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		6E8392521BC95F910076E576 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6E8392511BC95F910076E576 /* zh-Hans */,
+				6E8392531BC95F990076E576 /* Base */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		6ECF6A2E1BAB0A900075317A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6ECF6A2F1BAB0A900075317A /* Base */,
+				6E83924C1BC95EFA0076E576 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -377,8 +401,36 @@
 			isa = PBXVariantGroup;
 			children = (
 				6ECF6A371BAB0A900075317A /* Base */,
+				6E83924D1BC95EFA0076E576 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6EDF7B4C1BC964720004A367 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EDF7B4B1BC964720004A367 /* zh-Hans */,
+				6EDF7B4D1BC964730004A367 /* Base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6EDF7B501BC968F50004A367 /* SettingViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EDF7B4F1BC968F50004A367 /* zh-Hans */,
+				6EDF7B511BC968F90004A367 /* Base */,
+			);
+			name = SettingViewController.xib;
+			sourceTree = "<group>";
+		};
+		6EDF7B541BC9692B0004A367 /* SettingCells.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EDF7B531BC9692B0004A367 /* zh-Hans */,
+				6EDF7B551BC9692E0004A367 /* Base */,
+			);
+			name = SettingCells.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -476,9 +528,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.xeecos.GIFMaker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6490a745-b29f-4dae-973d-b2ee9d53a6bf";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -495,7 +547,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "6490a745-b29f-4dae-973d-b2ee9d53a6bf";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

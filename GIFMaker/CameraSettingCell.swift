@@ -55,10 +55,10 @@ class CameraSettingCell: UITableViewCell {
         }
         if((timeSlider) != nil){
             timeSlider.value = 0
-            timeLabel.text = String(format: "%d secs", cam!.time)
+            timeLabel.text = String(format: "%d %@", cam!.time,NSLocalizedString("secs", comment: ""))
             
             intervalSlider.value = 0
-            intervalLabel.text = String(format: "%.1f secs / %d frames", cam!.interval,Int(Float(cam!.time)/Float(cam!.interval)))
+            intervalLabel.text = String(format: "%.1f %@ / %d %@", cam!.interval,NSLocalizedString("secs", comment: ""),Int(Float(cam!.time)/Float(cam!.interval)),NSLocalizedString("frames", comment: ""))
         }
 
     }
@@ -148,8 +148,8 @@ class CameraSettingCell: UITableViewCell {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         let time = timeSlider.value/2
         
-        timeLabel.text = String(format: "%.1f secs", Float(cam.time)+time)
-        intervalLabel.text = String(format: "%.1f secs / %d frames", cam.interval,Int((Float(cam.time)+time)/cam.interval))
+        timeLabel.text = String(format: "%.1f %@", Float(cam.time)+time,NSLocalizedString("secs", comment: ""))
+        intervalLabel.text = String(format: "%.1f %@ / %d %@", cam.interval,NSLocalizedString("secs", comment: ""),Int((Float(cam.time)+time)/cam.interval),NSLocalizedString("frames", comment: ""))
     }
     @IBAction func timeTouchEnd(sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
@@ -158,17 +158,17 @@ class CameraSettingCell: UITableViewCell {
             cam.time = 0
         }
         timeSlider.value = 0
-        timeLabel.text = String(format: "%.1f secs", Float(cam.time))
-        intervalLabel.text = String(format: "%.1f secs / %d frames", cam.interval,Int((Float(cam.time)/cam.interval)))
+        timeLabel.text = String(format: "%.1f %@", Float(cam.time),NSLocalizedString("secs", comment: ""))
+        intervalLabel.text = String(format: "%.1f %@ / %d %@", cam.interval,NSLocalizedString("secs", comment: ""),Int((Float(cam.time)/cam.interval)),NSLocalizedString("frames", comment: ""))
     }
     
     @IBAction func intervalChanged(sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         let interval = intervalSlider.value/4
         if((cam.interval+interval)>0.1){
-            intervalLabel.text = String(format: "%.1f secs / %d frames", (cam.interval+interval),Int(Float(cam.time)/Float(cam.interval+interval)))
+            intervalLabel.text = String(format: "%.1f %@ / %d %@", (cam.interval+interval),NSLocalizedString("secs", comment: ""),Int(Float(cam.time)/Float(cam.interval+interval)),NSLocalizedString("frames", comment: ""))
         }else{
-            intervalLabel.text = String(format: "%.1f secs / %d frames",0.1,Int(Float(cam.time)/0.1))
+            intervalLabel.text = String(format: "%.1f %@ / %d %@",0.1,NSLocalizedString("secs", comment: ""),Int(Float(cam.time)/0.1),NSLocalizedString("frames", comment: ""))
         }
     }
     
@@ -179,7 +179,7 @@ class CameraSettingCell: UITableViewCell {
             cam.interval = 0.1
         }
         intervalSlider.value = 0
-        timeLabel.text = String(format: "%.1f secs", Float(cam.time))
-        intervalLabel.text = String(format: "%.1f secs / %d frames", cam.interval,Int((Float(cam.time)/cam.interval)))
+        timeLabel.text = String(format: "%.1f %@", Float(cam.time),NSLocalizedString("secs", comment: ""))
+        intervalLabel.text = String(format: "%.1f %@ / %d %@", cam.interval,NSLocalizedString("secs", comment: ""),Int((Float(cam.time)/cam.interval)),NSLocalizedString("frames", comment: ""))
     }
 }
