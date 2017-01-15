@@ -18,13 +18,13 @@ class ResolutionSettingCell: UITableViewCell {
         resolutionSeg.selectedSegmentIndex = Int(setting.resolution)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    @IBAction func resolutionChanged(sender: AnyObject) {
+    @IBAction func resolutionChanged(_ sender: AnyObject) {
         
         let sw:UISegmentedControl = sender as! UISegmentedControl
         let setting:SettingModel = DataManager.sharedManager().setting(0)!

@@ -23,7 +23,7 @@ class CameraSettingCell: UITableViewCell {
     var cid:Int16 = 0
     var sid:Int16 = 0
     weak var tableView:UITableView!
-    func setCameraIndex(sid:Int16, cid:Int16){
+    func setCameraIndex(_ sid:Int16, cid:Int16){
         self.cid = cid
         if(self.cid<0){
             self.cid = 0
@@ -62,16 +62,16 @@ class CameraSettingCell: UITableViewCell {
         }
 
     }
-    func assignTableView(tableView:UITableView){
+    func assignTableView(_ tableView:UITableView){
         self.tableView = tableView
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    @IBAction func focusChanged(sender: AnyObject) {
+    @IBAction func focusChanged(_ sender: AnyObject) {
         focusLabel.text = String(format: "%.2f", focusSlider.value/8000.0)
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         cam.focus = focusSlider.value
@@ -79,7 +79,7 @@ class CameraSettingCell: UITableViewCell {
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
     
-    @IBAction func speedChanged(sender: AnyObject) {
+    @IBAction func speedChanged(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         var scale:Float = 1
         if(cam.speed<500){
@@ -104,7 +104,7 @@ class CameraSettingCell: UITableViewCell {
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
     
-    @IBAction func speedTouchEnd(sender: AnyObject) {
+    @IBAction func speedTouchEnd(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         var scale:Float = 1
         if(cam.speed<500){
@@ -131,27 +131,27 @@ class CameraSettingCell: UITableViewCell {
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
     
-    @IBAction func focusEnd(sender: AnyObject) {
+    @IBAction func focusEnd(_ sender: AnyObject) {
         tableView.alpha = 1.0
     }
-    @IBAction func isoEnd(sender: AnyObject) {
+    @IBAction func isoEnd(_ sender: AnyObject) {
         tableView.alpha = 1.0
     }
-    @IBAction func isoChanged(sender: AnyObject) {
+    @IBAction func isoChanged(_ sender: AnyObject) {
         isoLabel.text = String(format: "%.0f", isoSlider.value)
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         cam.iso = Int16(isoSlider.value)
         tableView.alpha = 0.1
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
-    @IBAction func timeChanged(sender: AnyObject) {
+    @IBAction func timeChanged(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         let time = timeSlider.value/2
         
         timeLabel.text = String(format: "%.1f %@", Float(cam.time)+time,NSLocalizedString("secs", comment: ""))
         intervalLabel.text = String(format: "%.1f %@ / %d %@", cam.interval,NSLocalizedString("secs", comment: ""),Int((Float(cam.time)+time)/cam.interval),NSLocalizedString("frames", comment: ""))
     }
-    @IBAction func timeTouchEnd(sender: AnyObject) {
+    @IBAction func timeTouchEnd(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         cam.time += Int32(floorf(timeSlider.value/2))
         if(cam.time<0){
@@ -162,7 +162,7 @@ class CameraSettingCell: UITableViewCell {
         intervalLabel.text = String(format: "%.1f %@ / %d %@", cam.interval,NSLocalizedString("secs", comment: ""),Int((Float(cam.time)/cam.interval)),NSLocalizedString("frames", comment: ""))
     }
     
-    @IBAction func intervalChanged(sender: AnyObject) {
+    @IBAction func intervalChanged(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         let interval = intervalSlider.value/4
         if((cam.interval+interval)>0.1){
@@ -172,7 +172,7 @@ class CameraSettingCell: UITableViewCell {
         }
     }
     
-    @IBAction func intervalTouchEnd(sender: AnyObject) {
+    @IBAction func intervalTouchEnd(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         cam.interval += intervalSlider.value/4
         if(cam.interval<0.1){

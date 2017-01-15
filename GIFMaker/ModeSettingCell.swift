@@ -19,13 +19,13 @@ class ModeSettingCell: UITableViewCell {
         modeSeg.selectedSegmentIndex = Int(setting.mode)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
 
-    @IBAction func modeChanged(sender: AnyObject) {
+    @IBAction func modeChanged(_ sender: AnyObject) {
         let sw:UISegmentedControl = sender as! UISegmentedControl
         let setting:SettingModel = DataManager.sharedManager().setting(0)!
         setting.mode = Int16(sw.selectedSegmentIndex)

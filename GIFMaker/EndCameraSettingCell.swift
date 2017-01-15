@@ -22,7 +22,7 @@ class EndCameraSettingCell: UITableViewCell {
     var cid:Int16 = 0
     var sid:Int16 = 0
     weak var tableView:UITableView!
-    func setCameraIndex(sid:Int16, cid:Int16){
+    func setCameraIndex(_ sid:Int16, cid:Int16){
         self.cid = cid
         if(self.cid<0){
             self.cid = 0
@@ -54,16 +54,16 @@ class EndCameraSettingCell: UITableViewCell {
         }
         
     }
-    func assignTableView(tableView:UITableView){
+    func assignTableView(_ tableView:UITableView){
         self.tableView = tableView
     }
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
     
-    @IBAction func focusChanged(sender: AnyObject) {
+    @IBAction func focusChanged(_ sender: AnyObject) {
         focusLabel.text = String(format: "%.2f", focusSlider.value/8000.0)
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         cam.focus = focusSlider.value
@@ -71,7 +71,7 @@ class EndCameraSettingCell: UITableViewCell {
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
     
-    @IBAction func speedChanged(sender: AnyObject) {
+    @IBAction func speedChanged(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         var scale:Float = 1
         if(cam.speed<500){
@@ -96,7 +96,7 @@ class EndCameraSettingCell: UITableViewCell {
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
     
-    @IBAction func speedTouchEnd(sender: AnyObject) {
+    @IBAction func speedTouchEnd(_ sender: AnyObject) {
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         var scale:Float = 1
         if(cam.speed<500){
@@ -120,19 +120,19 @@ class EndCameraSettingCell: UITableViewCell {
         speedLabel.text = String(format: "1/%d", cam.speed)
         speedSlider.value = 0
         tableView.alpha = 1.0
-        speedSwitcher.on = false
+        speedSwitcher.isOn = false
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
     
-    @IBAction func focusEnd(sender: AnyObject) {
+    @IBAction func focusEnd(_ sender: AnyObject) {
         tableView.alpha = 1.0
-        focusSwitcher.on = false
+        focusSwitcher.isOn = false
     }
-    @IBAction func isoEnd(sender: AnyObject) {
+    @IBAction func isoEnd(_ sender: AnyObject) {
         tableView.alpha = 1.0
-        isoSwitcher.on = false
+        isoSwitcher.isOn = false
     }
-    @IBAction func isoChanged(sender: AnyObject) {
+    @IBAction func isoChanged(_ sender: AnyObject) {
         isoLabel.text = String(format: "%.0f", isoSlider.value)
         let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
         cam.iso = Int16(isoSlider.value)
@@ -140,8 +140,8 @@ class EndCameraSettingCell: UITableViewCell {
         VideoManager.sharedManager().configureDevice(sid,cid:cid)
     }
     
-    @IBAction func focusSwitch(sender: AnyObject) {
-        if(focusSwitcher.on){
+    @IBAction func focusSwitch(_ sender: AnyObject) {
+        if(focusSwitcher.isOn){
             let prevCam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid-1)!
             let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
             cam.focus = prevCam.focus
@@ -150,8 +150,8 @@ class EndCameraSettingCell: UITableViewCell {
         }
     }
     
-    @IBAction func speedSwitch(sender: AnyObject) {
-        if(speedSwitcher.on){
+    @IBAction func speedSwitch(_ sender: AnyObject) {
+        if(speedSwitcher.isOn){
             let prevCam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid-1)!
             let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
             cam.speed = prevCam.speed
@@ -165,8 +165,8 @@ class EndCameraSettingCell: UITableViewCell {
         }
     }
     
-    @IBAction func isoSwitch(sender: AnyObject) {
-        if(isoSwitcher.on){
+    @IBAction func isoSwitch(_ sender: AnyObject) {
+        if(isoSwitcher.isOn){
             let prevCam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid-1)!
             let cam:CameraModel = DataManager.sharedManager().camera(sid,cid: cid)!
             cam.iso = prevCam.iso

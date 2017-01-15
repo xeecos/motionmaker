@@ -26,8 +26,8 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
     var videoOutput:AVCaptureMovieFileOutput?
     var imageOutput:AVCaptureStillImageOutput?
     var videoSampleOutput:AVCaptureVideoDataOutput?
-    var timer:NSTimer?
-    var outputSampleFileURL:NSURL?
+    var timer:Timer?
+    var outputSampleFileURL:URL?
     var isRecording:Bool = false
     // If we find a device we'll store it here for later use
     var captureDevice : AVCaptureDevice?
@@ -57,11 +57,11 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
         let devices = AVCaptureDevice.devices()
         
         // Loop through all the capture devices on this phone
-        for device in devices {
+        for device in devices! {
             // Make sure this particular device supports video
-            if (device.hasMediaType(AVMediaTypeVideo)) {
+            if ((device as AnyObject).hasMediaType(AVMediaTypeVideo)) {
                 // Finally check the position and confirm we've got the back camera
-                if(device.position == AVCaptureDevicePosition.Back) {
+                if((device as AnyObject).position == AVCaptureDevicePosition.back) {
                     captureDevice = device as? AVCaptureDevice
                     if captureDevice != nil {
                         beginSession()
@@ -70,18 +70,18 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             }
         }
         
-        AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) { (granted:Bool) -> Void in
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) { (granted:Bool) -> Void in
             
         }
         
         createAlbum()
         
-        self.timer = NSTimer.scheduledTimerWithTimeInterval(0.05, target: self, selector: "timerHandle", userInfo: nil, repeats: true)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(VideoManager.timerHandle), userInfo: nil, repeats: true)
     }
     var recordBarButton:UIBarButtonItem?
     func timerHandle(){
         if(isRecording){
-            currentTime = Float(NSDate().timeIntervalSince1970 - startTime)
+            currentTime = Float(Date().timeIntervalSince1970 - startTime)
             recordBarButton?.title = "\(Int32(Float(totalTime)-currentTime))"
 
             let per:Float = currentTime/Float(totalTime)
@@ -102,7 +102,7 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
     func nextCamera(){
         
         let camera:CameraModel? = DataManager.sharedManager().camera(0, cid: cameraID)!
-        startTime = NSDate().timeIntervalSince1970
+        startTime = Date().timeIntervalSince1970
         totalTime = (camera?.time)!
         startFocus = (camera?.focus)!
         startISO = Float((camera?.iso)!)
@@ -121,16 +121,16 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             }
         }else{
             isRecording = false
-            let time: NSTimeInterval = 2.0
-            let delay = dispatch_time(DISPATCH_TIME_NOW,Int64(time * Double(NSEC_PER_SEC)))
-            dispatch_after(delay, dispatch_get_main_queue()) {
+            let time: TimeInterval = 2.0
+            let delay = DispatchTime.now() + Double(Int64(time * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delay) {
                 self.stopRecord()
             }
         }
-        cameraID++
+        cameraID += 1
     }
     
-    func configureDevice(sid:Int16,cid:Int16) {
+    func configureDevice(_ sid:Int16,cid:Int16) {
         if let device = captureDevice {
             do {
                 try device.lockForConfiguration()
@@ -159,7 +159,7 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             }
             isVideo = setting.mode==0
             
-            device.focusMode = AVCaptureFocusMode.AutoFocus
+            device.focusMode = AVCaptureFocusMode.autoFocus
             if(currentFocus<0){
                 currentFocus = 0
             }else if(currentFocus>8000){
@@ -192,7 +192,7 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             let duration:CMTime = CMTimeMake(1, Int32(max(2,currentSpeed)))
             let minISO = device.activeFormat.minISO
             let maxISO = device.activeFormat.maxISO
-            device.setExposureModeCustomWithDuration(duration, ISO: (Float(currentISO-100)/1600)*(maxISO-minISO)+minISO, completionHandler: { (timestamp:CMTime) -> Void in
+            device.setExposureModeCustomWithDuration(duration, iso: (Float(currentISO-100)/1600)*(maxISO-minISO)+minISO, completionHandler: { (timestamp:CMTime) -> Void in
                 
             })
             
@@ -211,7 +211,7 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             print(error)
         }
         
-        let audioDevice:AVCaptureDevice? = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeAudio)
+        let audioDevice:AVCaptureDevice? = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeAudio)
         do{
             let audioInput:AVCaptureDeviceInput? = try AVCaptureDeviceInput(device: audioDevice!);
             captureSession!.addInput(audioInput)
@@ -227,13 +227,13 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
         
     }
     
-    func configVideoView(videoView:UIView){
+    func configVideoView(_ videoView:UIView){
         if((previewLayer)==nil){
             
         }else{
             videoView.layer.addSublayer(previewLayer!)
             previewLayer?.frame =  videoView.frame
-            previewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.LandscapeRight
+            previewLayer!.connection.videoOrientation = AVCaptureVideoOrientation.landscapeRight
         }
     }
     func startRecord(){
@@ -255,68 +255,68 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
                 print("can add output")
                 captureSession!.addOutput(videoOutput)
             }
-            let paths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
-            let documentsDirectoryPath:NSString! = paths.objectAtIndex(0) as! NSString
-            let outputpathofmovie:String! = documentsDirectoryPath.stringByAppendingString("/\(NSDate().timeIntervalSince1970)").stringByAppendingString(".MOV");
-            let outputURL:NSURL! = NSURL(fileURLWithPath: outputpathofmovie);
+            let paths:NSArray = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true) as NSArray
+            let documentsDirectoryPath:NSString! = paths.object(at: 0) as! NSString
+            let outputpathofmovie:String! = documentsDirectoryPath.appending("/\(Date().timeIntervalSince1970)") + ".MOV";
+            let outputURL:URL! = URL(fileURLWithPath: outputpathofmovie);
             print(outputURL.path)
             var videoConnection:AVCaptureConnection?;
 
             for connection in videoOutput!.connections
             {
 
-                for port in (connection.inputPorts as NSArray)
+                for port in ((connection as AnyObject).inputPorts as NSArray)
                 {
 
-                    if ( port.mediaType==AVMediaTypeVideo)
+                    if ( (port as AnyObject).mediaType==AVMediaTypeVideo)
                     {
                         videoConnection = connection as? AVCaptureConnection;
                     }
                 }
             }
             
-            videoConnection?.videoOrientation = AVCaptureVideoOrientation.LandscapeRight
-            videoOutput?.startRecordingToOutputFileURL(outputURL, recordingDelegate: self)
+            videoConnection?.videoOrientation = AVCaptureVideoOrientation.landscapeRight
+            videoOutput?.startRecording(toOutputFileURL: outputURL, recordingDelegate: self)
         }else{
             captureSession!.stopRunning()
-            let paths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true)
-            let documentsDirectoryPath:NSString! = paths.objectAtIndex(0) as! NSString
-            let outputpathofmovie:String! = documentsDirectoryPath.stringByAppendingString("/\(NSDate().timeIntervalSince1970)").stringByAppendingString(".MOV");
-            self.outputSampleFileURL = NSURL(fileURLWithPath: outputpathofmovie);
+            let paths:NSArray = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.allDomainsMask, true) as NSArray
+            let documentsDirectoryPath:NSString! = paths.object(at: 0) as! NSString
+            let outputpathofmovie:String! = documentsDirectoryPath.appending("/\(Date().timeIntervalSince1970)") + ".MOV";
+            self.outputSampleFileURL = URL(fileURLWithPath: outputpathofmovie);
             do{
 
-                try videoWriter = AVAssetWriter(URL: outputSampleFileURL!, fileType: AVFileTypeMPEG4)
+                try videoWriter = AVAssetWriter(outputURL: outputSampleFileURL!, fileType: AVFileTypeMPEG4)
                 
                 writerInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo, outputSettings:[ AVVideoCodecKey : AVVideoCodecH264,AVVideoWidthKey : String(videoWidth), AVVideoHeightKey: String(videoHeight)])
-                videoWriter!.addInput(writerInput!)
+                videoWriter!.add(writerInput!)
                 self.writeAdapter = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: writerInput!, sourcePixelBufferAttributes:[String(kCVPixelBufferPixelFormatTypeKey): String(kCVPixelFormatType_32ARGB), String(kCVPixelBufferWidthKey): String(videoWidth),String(kCVPixelBufferHeightKey): String(videoHeight)])
                 writerInput!.expectsMediaDataInRealTime = true;
 
                 videoWriter!.startWriting()
-                videoWriter!.startSessionAtSourceTime(CMTimeMake(0, 24))
+                videoWriter!.startSession(atSourceTime: CMTimeMake(0, 24))
                 print("add writer")
             }catch let err as NSError{
                 print(err)
             }
             self.videoSampleOutput = AVCaptureVideoDataOutput()
             
-            let recordingQueue = dispatch_queue_create("q\(NSDate().timeIntervalSince1970)", DISPATCH_QUEUE_SERIAL)
+            let recordingQueue = DispatchQueue(label: "q\(Date().timeIntervalSince1970)", attributes: [])
             videoSampleOutput?.setSampleBufferDelegate(self, queue: recordingQueue)
             videoSampleOutput?.alwaysDiscardsLateVideoFrames = true
-            videoSampleOutput?.videoSettings = videoSampleOutput?.recommendedVideoSettingsForAssetWriterWithOutputFileType("public.mpeg-4")
+            videoSampleOutput?.videoSettings = videoSampleOutput?.recommendedVideoSettingsForAssetWriter(withOutputFileType: "public.mpeg-4")
             
-            print(captureSession!.outputs,videoSampleOutput)
+//            print(captureSession!.outputs,videoSampleOutput)
             captureSession!.addOutput(videoSampleOutput)
             captureSession!.commitConfiguration()
             captureSession!.startRunning()
             
         }
-        let time: NSTimeInterval = 1.0
-        let delay = dispatch_time(DISPATCH_TIME_NOW,Int64(time * Double(NSEC_PER_SEC)))
+        let time: TimeInterval = 1.0
+        let delay = DispatchTime.now() + Double(Int64(time * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         prevTime = 0
         currentTime = 0
         frameCount = 0
-        dispatch_after(delay, dispatch_get_main_queue()) {
+        DispatchQueue.main.asyncAfter(deadline: delay) {
             self.cameraID = 0
             self.isRecording = true
             self.nextCamera()
@@ -332,9 +332,9 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
             self.captureSession!.removeOutput(self.videoSampleOutput)
             self.videoSampleOutput = nil
             writerInput!.markAsFinished();
-            videoWriter!.endSessionAtSourceTime(CMTimeMake(Int64(Float(frameCount - 1) * Float(fps) * Float(durationForEachImage)), Int32(fps)));
+            videoWriter!.endSession(atSourceTime: CMTimeMake(Int64(Float(frameCount - 1) * Float(fps) * Float(durationForEachImage)), Int32(fps)));
             
-            videoWriter!.finishWritingWithCompletionHandler({ () -> Void in
+            videoWriter!.finishWriting(completionHandler: { () -> Void in
                 print("finish recording")
                 self.videoWriter!.cancelWriting()
                 self.videoSampleOutput?.setSampleBufferDelegate(nil, queue: nil)
@@ -345,31 +345,30 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
                 self.videoWriter = nil
                 self.isRecording = false
                 
-                PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-                    let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(self.outputSampleFileURL!)
+                PHPhotoLibrary.shared().performChanges({
+                    let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: self.outputSampleFileURL!)
                     let assetPlaceholder = assetRequest!.placeholderForCreatedAsset
-                    let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.assetCollection)
+                    let albumChangeRequest = PHAssetCollectionChangeRequest(for: self.assetCollection)
                     let enumeration: NSArray = [assetPlaceholder!]
                     albumChangeRequest!.addAssets(enumeration)
                     }, completionHandler: { success, error in
                         self.recordBarButton?.title = "Record"
                         print("added frames to album")
-                        print(error)
-                        let fileManager:NSFileManager? = NSFileManager.defaultManager()
+                        let fileManager:FileManager? = FileManager.default
                         do{
-                            try fileManager?.removeItemAtURL(self.outputSampleFileURL!)
+                            try fileManager?.removeItem(at: self.outputSampleFileURL!)
                         }catch let err as NSError {
                             print(err)
                         }
                 })
             });
         }
-        NSNotificationCenter.defaultCenter().postNotificationName("STOP_RECORDING", object: nil, userInfo: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "STOP_RECORDING"), object: nil, userInfo: nil)
     }
     
     var assetCollection: PHAssetCollection!
     var albumFound : Bool = false
-    var photosAsset: PHFetchResult!
+    var photosAsset: PHFetchResult<AnyObject>!
     var assetThumbnailSize:CGSize!
     var collection: PHAssetCollection!
     var assetCollectionPlaceholder: PHObjectPlaceholder!
@@ -377,22 +376,22 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
     func createAlbum() {
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate(format: "title = %@", "Motion Maker")
-        let collection : PHFetchResult = PHAssetCollection.fetchAssetCollectionsWithType(.Album, subtype: .Any, options: fetchOptions)
+        let collection : PHFetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
         if let first_obj: AnyObject = collection.firstObject {
             self.albumFound = true
-            assetCollection = collection.firstObject as! PHAssetCollection
+            assetCollection = collection.firstObject!
         } else {
-            PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-                let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollectionWithTitle("Motion Maker")
+            PHPhotoLibrary.shared().performChanges({
+                let createAlbumRequest : PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: "Motion Maker")
                 self.assetCollectionPlaceholder = createAlbumRequest.placeholderForCreatedAssetCollection
                 }, completionHandler: { success, error in
                     self.albumFound = (success ? true: false)
                     
                     if (success) {
-                        let collectionFetchResult = PHAssetCollection.fetchAssetCollectionsWithLocalIdentifiers([self.assetCollectionPlaceholder.localIdentifier], options: nil)
+                        let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [self.assetCollectionPlaceholder.localIdentifier], options: nil)
                         print(collectionFetchResult)
-                        self.assetCollection = collectionFetchResult.firstObject as! PHAssetCollection
+                        self.assetCollection = collectionFetchResult.firstObject!
                     }
             })
         }
@@ -414,35 +413,34 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
 //        })
     }
     
-    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
 
         if(currentTime-prevTime>interval){
             prevTime = currentTime
             print("append frame")
             let frameTime:CMTime = CMTimeMake(Int64(Float(self.frameCount) * Float(self.fps) * self.durationForEachImage), Int32(self.fps))
-            if(self.writerInput!.readyForMoreMediaData){
-                self.writeAdapter?.appendPixelBuffer(CMSampleBufferGetImageBuffer(sampleBuffer)!, withPresentationTime: frameTime)
-                self.frameCount++
+            if(self.writerInput!.isReadyForMoreMediaData){
+                self.writeAdapter?.append(CMSampleBufferGetImageBuffer(sampleBuffer)!, withPresentationTime: frameTime)
+                self.frameCount += 1
             }
         }
     }
-    func captureOutput(captureOutput: AVCaptureOutput!, didDropSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
         print("drop")
     }
-    func captureOutput(captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAtURL outputFileURL: NSURL!, fromConnections connections: [AnyObject]!, error: NSError!) {
+    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
         print("capture output : finish recording to \(outputFileURL) \(error)")
-        PHPhotoLibrary.sharedPhotoLibrary().performChanges({
-            let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideoAtFileURL(outputFileURL)
+        PHPhotoLibrary.shared().performChanges({
+            let assetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL)
             let assetPlaceholder = assetRequest!.placeholderForCreatedAsset
-            let albumChangeRequest = PHAssetCollectionChangeRequest(forAssetCollection: self.assetCollection)
+            let albumChangeRequest = PHAssetCollectionChangeRequest(for: self.assetCollection)
             let enumeration: NSArray = [assetPlaceholder!]
             albumChangeRequest!.addAssets(enumeration)
             }, completionHandler: { success, error in
                 print("added video to album")
-                print(error)
-                let fileManager:NSFileManager? = NSFileManager.defaultManager()
+                let fileManager:FileManager? = FileManager.default
                 do{
-                    try fileManager?.removeItemAtURL(outputFileURL)
+                    try fileManager?.removeItem(at: outputFileURL)
                 }catch let err as NSError {
                     print(err)
                 }
@@ -450,7 +448,7 @@ class VideoManager: NSObject,AVCaptureFileOutputRecordingDelegate,AVCaptureVideo
         
     }
     
-    func captureOutput(captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAtURL fileURL: NSURL!, fromConnections connections: [AnyObject]!) {
+    func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
         print("capture output: started recording to \(fileURL)")
     }
 }

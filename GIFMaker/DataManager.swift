@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 class DataManager: NSObject {
     
-    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext
     
     static let VIDEO_MODE:Int16 = 0
     static let TIMELASPE_MODE:Int16 = 1
@@ -35,7 +35,7 @@ class DataManager: NSObject {
 
         return setting
     }
-    func createCamera(sid:Int16,cid:Int16=0)->CameraModel{
+    func createCamera(_ sid:Int16,cid:Int16=0)->CameraModel{
         let cam = CameraModel.create(self.managedObjectContext)
         cam.sid = sid
         cam.focus = 10.0
@@ -47,35 +47,35 @@ class DataManager: NSObject {
         cam.cid = cid
         return cam
     }
-    func removeCamera(sid:Int16,cid:Int16){
+    func removeCamera(_ sid:Int16,cid:Int16){
         let cam:CameraModel? = camera(sid, cid: cid)
         if((cam) != nil){
-            managedObjectContext.deleteObject(cam!)
+            managedObjectContext.delete(cam!)
         }
     }
-    func setting(sid:Int16)->SettingModel?{
+    func setting(_ sid:Int16)->SettingModel?{
         
-        let request = NSFetchRequest(entityName: "Setting")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Setting")
         request.predicate = NSPredicate(format: "sid == %d",sid)
         var result:NSArray! = []
         do {
-            result = try managedObjectContext.executeFetchRequest(request)
+            result = try managedObjectContext.fetch(request) as NSArray!
         } catch let error as NSError {
             print("error:\(error)")
         }
-        if(result.count>0){
-            return result[0] as? SettingModel
+        if((result?.count)!>0){
+            return result?[0] as? SettingModel
         }else{
             return nil
         }
     }
-    func camera(sid:Int16,cid:Int16=0)->CameraModel?{
+    func camera(_ sid:Int16,cid:Int16=0)->CameraModel?{
         
-        let request = NSFetchRequest(entityName: "Camera")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Camera")
         request.predicate = NSPredicate(format: "sid == %d AND cid == %d",sid,cid)
         var result:NSArray! = []
         do {
-            result = try managedObjectContext.executeFetchRequest(request)
+            result = try managedObjectContext.fetch(request) as NSArray!
         } catch let error as NSError {
             print("error:\(error)")
         }
@@ -85,12 +85,12 @@ class DataManager: NSObject {
             return nil
         }
     }
-    func countOfCamera(sid:Int16)->Int16{
-        let request = NSFetchRequest(entityName: "Camera")
+    func countOfCamera(_ sid:Int16)->Int16{
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Camera")
         request.predicate = NSPredicate(format: "sid == %d",sid)
         var result:NSArray! = []
         do {
-            result = try managedObjectContext.executeFetchRequest(request)
+            result = try managedObjectContext.fetch(request) as NSArray!
         } catch let error as NSError {
             print("error:\(error)")
         }

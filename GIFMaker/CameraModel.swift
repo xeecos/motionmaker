@@ -20,8 +20,8 @@ class CameraModel: NSManagedObject {
     @NSManaged var index: Int16
     @NSManaged var sid: Int16
     
-    class func create(context: NSManagedObjectContext) -> CameraModel {
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName("Camera", inManagedObjectContext: context) as! CameraModel
+    class func create(_ context: NSManagedObjectContext) -> CameraModel {
+        let newItem = NSEntityDescription.insertNewObject(forEntityName: "Camera", into: context) as! CameraModel
         return newItem
     }
 }

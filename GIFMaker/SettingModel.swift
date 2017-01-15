@@ -15,8 +15,8 @@ class SettingModel: NSManagedObject {
     @NSManaged var resolution:Int16
     @NSManaged var sid:Int16
     
-    class func create(context: NSManagedObjectContext) -> SettingModel {
-        let newItem = NSEntityDescription.insertNewObjectForEntityForName("Setting", inManagedObjectContext: context) as! SettingModel
+    class func create(_ context: NSManagedObjectContext) -> SettingModel {
+        let newItem = NSEntityDescription.insertNewObject(forEntityName: "Setting", into: context) as! SettingModel
         return newItem
     }
 }

@@ -32,28 +32,28 @@ class ViewController: UIViewController {
         
         recordButton.title = NSLocalizedString("Record", comment: "")
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "disableRecord", name: "STOP_RECORDING", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ViewController.disableRecord), name: NSNotification.Name(rawValue: "STOP_RECORDING"), object: nil)
     }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         print("appear")
         VideoManager.sharedManager().configVideoView(self.videoView!)
         VideoManager.sharedManager().configureDevice(0,cid:0)
     }
-    @IBAction func openSetting(sender: AnyObject) {
-        self.presentViewController(SettingViewController(), animated: true) { () -> Void in
+    @IBAction func openSetting(_ sender: AnyObject) {
+        self.present(SettingViewController(), animated: true) { () -> Void in
             
         }
     }
-    let screenWidth = UIScreen.mainScreen().bounds.size.width
+    let screenWidth = UIScreen.main.bounds.size.width
    
     
     var recording:Bool = false
     var disableButton:Bool = false
-    @IBAction func switchRecord(sender: AnyObject) {
+    @IBAction func switchRecord(_ sender: AnyObject) {
         if(disableButton){
-            let time: NSTimeInterval = 2.0
-            let delay = dispatch_time(DISPATCH_TIME_NOW,Int64(time * Double(NSEC_PER_SEC)))
-            dispatch_after(delay, dispatch_get_main_queue()) {
+            let time: TimeInterval = 2.0
+            let delay = DispatchTime.now() + Double(Int64(time * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: delay) {
                 self.disableButton = false
             }
             return
@@ -89,15 +89,15 @@ class ViewController: UIViewController {
         VideoManager.sharedManager().stopRecord()
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.LandscapeRight;
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeRight;
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return false;
     }
 }

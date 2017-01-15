@@ -19,7 +19,7 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         self.titleLabel.text = NSLocalizedString("Setting", comment: "")
         // Do any additional setup after loading the view.
     }
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if((self.videoView)==nil){
             
         }else{
@@ -31,9 +31,9 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func backHandle(sender: AnyObject) {
+    @IBAction func backHandle(_ sender: AnyObject) {
         DataManager.sharedManager().save()
-        self.dismissViewControllerAnimated(true) { () -> Void in
+        self.dismiss(animated: true) { () -> Void in
             
         }
     }
@@ -47,20 +47,20 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         // Pass the selected object to the new view controller.
     }
     */
-    @IBAction func focusSwitch(sender: AnyObject) {
+    @IBAction func focusSwitch(_ sender: AnyObject) {
     }
-    @IBAction func addCameraHandle(sender: AnyObject) {
+    @IBAction func addCameraHandle(_ sender: AnyObject) {
         DataManager.sharedManager().createCamera(0,cid:DataManager.sharedManager().countOfCamera(0));
         self.tableView.reloadData()
     }
-    @IBAction func removeCameraHandle(sender: AnyObject) {
+    @IBAction func removeCameraHandle(_ sender: AnyObject) {
         let count:Int16 = DataManager.sharedManager().countOfCamera(0)
         if(count>2){
             DataManager.sharedManager().removeCamera(0,cid:count-1);
             self.tableView.reloadData()
         }
     }
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var title:String?
         switch(section){
         case 0:
@@ -84,14 +84,14 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         }
         return title
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    func numberOfSectionsInTableView(tableView: UITableView) ->Int
+    func numberOfSections(in tableView: UITableView) ->Int
     {
         return Int(DataManager.sharedManager().countOfCamera(0))+3
     }
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var height:CGFloat = 44.0
         let section:NSInteger = indexPath.section
 
@@ -106,46 +106,41 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         }
         return height
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell:UITableViewCell?
         let section = indexPath.section
 
         switch(section){
             case 0:
-                cell = tableView.dequeueReusableCellWithIdentifier("modeSettingCell")
+                cell = tableView.dequeueReusableCell(withIdentifier: "modeSettingCell")
                 if(cell==nil){
-                    let _nib:NSArray = NSBundle.mainBundle().loadNibNamed("SettingCells", owner: self, options: nil)
-                    cell = _nib.objectAtIndex(0) as? UITableViewCell;
+                    cell = Bundle.main.loadNibNamed("SettingCells", owner: self, options: nil)?[0] as? UITableViewCell;
                 }
             break
             case 1:
-                cell = tableView.dequeueReusableCellWithIdentifier("resolutionSettingCell")
+                cell = tableView.dequeueReusableCell(withIdentifier: "resolutionSettingCell")
                 if(cell==nil){
-                    let _nib:NSArray = NSBundle.mainBundle().loadNibNamed("SettingCells", owner: self, options: nil)
-                    cell = _nib.objectAtIndex(1) as? UITableViewCell;
+                    cell = Bundle.main.loadNibNamed("SettingCells", owner: self, options: nil)?[1] as? UITableViewCell;
                 }
                 break
             default: break
         }
         if(section==tableView.numberOfSections-1){
-            cell = tableView.dequeueReusableCellWithIdentifier("addSettingCell")
+            cell = tableView.dequeueReusableCell(withIdentifier: "addSettingCell")
             if(cell==nil){
-                let _nib:NSArray = NSBundle.mainBundle().loadNibNamed("SettingCells", owner: self, options: nil)
-                cell = _nib.objectAtIndex(4) as? UITableViewCell;
+                cell = Bundle.main.loadNibNamed("SettingCells", owner: self, options: nil)?[4] as? UITableViewCell;
             }
         }else if(section==tableView.numberOfSections-2){
-            cell = tableView.dequeueReusableCellWithIdentifier("endSettingCell")
+            cell = tableView.dequeueReusableCell(withIdentifier: "endSettingCell")
             if(cell==nil){
-                let _nib:NSArray = NSBundle.mainBundle().loadNibNamed("SettingCells", owner: self, options: nil)
-                cell = _nib.objectAtIndex(3) as? UITableViewCell;
+                cell = Bundle.main.loadNibNamed("SettingCells", owner: self, options: nil)?[3] as? UITableViewCell;
             }
             (cell as! EndCameraSettingCell).setCameraIndex(0, cid: Int16(indexPath.section-2))
             (cell as! EndCameraSettingCell).assignTableView(self.tableView)
         }else if(section>1){
-            cell = tableView.dequeueReusableCellWithIdentifier("cameraSettingCell")
+            cell = tableView.dequeueReusableCell(withIdentifier: "cameraSettingCell")
             if(cell==nil){
-                let _nib:NSArray = NSBundle.mainBundle().loadNibNamed("SettingCells", owner: self, options: nil)
-                cell = _nib.objectAtIndex(2) as? UITableViewCell;
+                cell = Bundle.main.loadNibNamed("SettingCells", owner: self, options: nil)?[2] as? UITableViewCell;
             }
             (cell as! CameraSettingCell).setCameraIndex(0, cid: Int16(indexPath.section-2))
             (cell as! CameraSettingCell).assignTableView(self.tableView)
@@ -153,15 +148,15 @@ class SettingViewController: UIViewController,UITableViewDataSource,UITableViewD
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.LandscapeRight;
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeRight;
     }
 
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return false;
     }
 }
